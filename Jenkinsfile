@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'josephkuala/devopsemrg-jenkins-agent'
+            image 'josephkuala/devopsemrg-jenkins-agent:latest'
             label 'docker-agent'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
