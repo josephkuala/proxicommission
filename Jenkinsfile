@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'jenkins/inbound-agent'
-            label 'inbound-agent'
+            image 'josephkuala/devopsemrg-jenkins-agent:latest'
+            label 'devopsemrg-agent'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
