@@ -1,11 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'josephkuala/devopsemrg-javajenkins-agent:latest'
-            label 'devopsemrg-java-agent'
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any
 
     environment {
         DOCKER_IMAGE = "proxicommission"
