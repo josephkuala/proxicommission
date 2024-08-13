@@ -19,19 +19,25 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone your repository which contains the Dockerfile
-                git credentialsId: 'github-creds', url: 'https://github.com/josephkuala/proxicommission.git'
+                git branch: 'main', url: 'https://github.com/josephkuala/proxicommission.git'
             }
         }
 
-        stage('Check and Remove Old Container') {
+        
+        stage('Check and Remove Old Docker Container') {
             steps {
                 script {
-                    // Check and remove the old Docker container if it exists
-                    sh """
-                        if [ \$(docker ps -a -f name=${CONTAINER_NAME} --format '{{.Names}}') = "${CONTAINER_NAME}" ]; then
-                            docker rm -f ${CONTAINER_NAME}
-                        fi
-                    """
+                    def container_name = sh(
+                        script: 'docker ps -a -f name=${CONTAINER_NAME} --format "{{.Names}}"',
+                        returnStdout: true
+                    ).trim()
+                    
+                    if (container_name == "${CONTAINER_NAME}") {
+                        echo "Container Api-Proxicom exists."
+                        // Add commands to stop and remove the container if needed
+                    } else {
+                        echo "Container Api-Proxicom does not exist."
+                    }
                 }
             }
         }
@@ -39,15 +45,20 @@ pipeline {
         stage('Check and Remove Old Docker Image') {
             steps {
                 script {
-                    // Check and remove the old Docker image if it exists
-                    sh """
-                        if docker images -q ${DOCKER_IMAGE}:${DOCKER_TAG}; then
-                            docker rmi ${DOCKER_IMAGE}:${DOCKER_TAG}
-                        fi
-                    """
+                    def image_id = sh(
+                        script: 'docker images -q ${DOCKER_IMAGE}',
+                        returnStdout: true
+                    ).trim()
+                    
+                    if (image_id) {
+                        sh 'docker rmi ${DOCKER_IMAGE}'
+                    } else {
+                        echo "Image proxicommission:latest does not exist."
+                    }
                 }
             }
         }
+        
 
         stage('Build Docker Image') {
             steps {
@@ -67,7 +78,7 @@ pipeline {
                         --name ${CONTAINER_NAME} \
                         -p ${PORT_MAPPING} \
                         --restart=${RESTART_POLICY} \
-                        --runtime=${RUNTIME_MODE} \
+                        --${RUNTIME_MODE} \
                         --network=${NETWORK_MODE} \
                         ${DOCKER_IMAGE}:${DOCKER_TAG}
                     """
