@@ -1,8 +1,8 @@
 pipeline {
     agent {
         docker {
-            image 'docker:stable-dind'
-            label 'dind-agent'
+            image 'josephkuala/devopsemrg-javajenkins-agent:latest'
+            label 'devopsemrg-java-agent'
             args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
