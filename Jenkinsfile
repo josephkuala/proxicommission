@@ -19,7 +19,7 @@ pipeline {
         stage('Clone Repository') {
             steps {
                 // Clone your repository which contains the Dockerfile
-                git credentialsId: 'github-creds', url: 'https://github.com/josephkuala/proxicommission.git'
+                git branch: 'main', url: 'https://github.com/josephkuala/proxicommission.git'
             }
         }
 
