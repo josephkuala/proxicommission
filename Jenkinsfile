@@ -35,6 +35,8 @@ pipeline {
                     if (container_name == "${CONTAINER_NAME}") {
                         echo "Container Api-Proxicom exists."
                         // Add commands to stop and remove the container if needed
+                        sh 'docker stop ${CONTAINER_NAME}'
+                        sh 'docker rm ${CONTAINER_NAME}'
                     } else {
                         echo "Container Api-Proxicom does not exist."
                     }

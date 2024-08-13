@@ -4,8 +4,7 @@ module.exports = {
     username: 'root',
     password: 'emrg@2022',
     database: 'proxicommission',
-    host: '172.19.0.39',
-    port: '3307',
+    host: 'mariadb',
     dialect: 'mariadb',
     logging: true
   },
@@ -13,8 +12,7 @@ module.exports = {
     username: 'root',
     password: 'emrg@2022',
     database: 'proxicommission_test',
-    host: '172.19.0.39',
-    port: '3307',
+    host: 'mariadb',
     dialect: 'mariadb',
     logging: false
   },
@@ -22,8 +20,7 @@ module.exports = {
     username: 'root',
     password: 'emrg@2022',
     database: 'proxicommission_prod',
-    host: '172.19.0.39',
-    port: '3307',
+    host: 'mariadb',
     dialect: 'mariadb',
     logging: false
   }
