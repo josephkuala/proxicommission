@@ -78,7 +78,7 @@ pipeline {
                         --name ${CONTAINER_NAME} \
                         -p ${PORT_MAPPING} \
                         --restart=${RESTART_POLICY} \
-                        --runtime=${RUNTIME_MODE} \
+                        --${RUNTIME_MODE} \
                         --network=${NETWORK_MODE} \
                         ${DOCKER_IMAGE}:${DOCKER_TAG}
                     """
