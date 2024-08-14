@@ -2,26 +2,26 @@
 module.exports = {
   development: {
     username: 'root',
-    password: 'emrg@2022',
+    password: '',
     database: 'proxicommission',
-    host: 'mariadb',
-    dialect: 'mariadb',
+    host: 'localhost',
+    dialect: 'mysql2',
     logging: true
   },
   test: {
     username: 'root',
-    password: 'emrg@2022',
+    password: '',
     database: 'proxicommission_test',
-    host: 'mariadb',
-    dialect: 'mariadb',
+    host: 'localhost',
+    dialect: 'mysql2',
     logging: false
   },
   production: {
     username: 'root',
-    password: 'emrg@2022',
+    password: '',
     database: 'proxicommission_prod',
-    host: 'mariadb',
-    dialect: 'mariadb',
+    host: 'localhost',
+    dialect: 'mysql2',
     logging: false
   }
 };

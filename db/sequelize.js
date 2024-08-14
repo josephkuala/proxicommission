@@ -1,8 +1,8 @@
 const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize('proxicommission', 'root', 'emrg@2022', {
-  host: 'mariadb',
-  dialect: 'mariadb',
+const sequelize = new Sequelize('proxicommission', 'root', '', {
+  host: 'localhost',
+  dialect: 'mysql2',
   logging: true
 });
 
