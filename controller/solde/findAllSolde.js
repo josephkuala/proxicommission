@@ -1,7 +1,16 @@
 const Solde = require('../../models/solde');
+const Medecin = require('../../models/medecin');
 
 exports.findAllSolde = async (req, res) => {
-   await Solde.findAll()
+   await Solde.findAll({
+    attributes: { exclude: ['medecinId'] },
+    include: [
+      {
+        model: Medecin,
+        attributes: ['id', 'nom', 'postnom', 'prenom'] // Spécifiez les attributs que vous souhaitez du médecin
+      },
+    ]
+   })
     .then(soldes => {
       const message = 'La liste des soldes a bien été récupéré.'
       res.json({ message, data: soldes })

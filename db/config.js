@@ -5,7 +5,7 @@ module.exports = {
     password: '',
     database: 'proxicommission',
     host: 'localhost',
-    dialect: 'mysql2',
+    dialect: 'mysql',
     logging: true
   },
   test: {
@@ -13,7 +13,7 @@ module.exports = {
     password: '',
     database: 'proxicommission_test',
     host: 'localhost',
-    dialect: 'mysql2',
+    dialect: 'mysql',
     logging: false
   },
   production: {
@@ -21,7 +21,7 @@ module.exports = {
     password: '',
     database: 'proxicommission_prod',
     host: 'localhost',
-    dialect: 'mysql2',
+    dialect: 'mysql',
     logging: false
   }
 };

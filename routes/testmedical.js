@@ -16,7 +16,7 @@ router.get('/testmedical/:id', findTestMedById);
 router.post('/createtest', createTestMed);
 
 //Put category
-router.put('/updatetest/:id', updateTestMed);
+router.put('/updatetest', updateTestMed);
 
 //Delete category
 router.delete('/deletetest/:id', deleteTestMed);
