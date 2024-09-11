@@ -12,6 +12,32 @@ router.get('/status', async (req, res) => {
   }
 });
 
+router.post('/status', async (req, res) => {
+  try {
+    const { isFunded } = req.body;
+    
+    // Vérifie si la ligne avec id 1 existe
+    const [status, created] = await StatusCompte.findOrCreate({
+      where: { id: 1 },
+      defaults: { isFunded } // Si la ligne n'existe pas, elle sera créée avec isFunded
+    });
+    
+    if (!created) {
+      // Si la ligne existe, elle est mise à jour
+      status.isFunded = isFunded;
+      await status.save();
+    }
+    
+    console.log('Status:', status);
+    onStatusUpdate(status);
+    res.json(status); // Renvoie l'objet de statut mis à jour ou créé
+  } catch (error) {
+    console.error('Erreur de mise à jour du statut du compte:', error);
+    res.status(500).json({ error: 'Erreur de mise à jour du statut du compte' });
+  }
+});
+
+
 /*router.post('/status', async (req, res) => {
   try {
     const { isFunded } = req.body;
@@ -23,7 +49,7 @@ router.get('/status', async (req, res) => {
     res.status(500).json({ error: 'Erreur de mise à jour du statut du compte' });
   }
 });*/
-router.post('/status', async (req, res) => {
+/*router.post('/status', async (req, res) => {
   try {
     const { isFunded } = req.body;
     
@@ -46,7 +72,7 @@ router.post('/status', async (req, res) => {
     console.error('Erreur de mise à jour du statut du compte:', error);
     res.status(500).json({ error: 'Erreur de mise à jour du statut du compte' });
   }
-});
+});*/
 
 function onStatusUpdate(data) {
   const io = getIO();
